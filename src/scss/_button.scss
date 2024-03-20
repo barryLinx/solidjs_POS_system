@@ -1,0 +1,21 @@
+
+.btn-outline-primary{  
+  &.active ,&:hover{
+    color: var(--my-bg-white) ;
+  }  
+}
+
+.btn-primary{  
+ &:hover{
+  color: var(--my-bg-white) ;
+ }
+}
+
+.btn:hover{
+  border: 1px solid var(--my-primary) ;
+  //background-color: aliceblue;
+}
+
+.btn.active{
+  color: var(--my-bg-white) ;
+}

@@ -1,0 +1,11 @@
+// .table-hover {
+//   > tbody > tr:hover > * {
+//     --bs-table-color-state: var(--my-bg-white);
+//     --bs-table-bg-state: var(--my-primary);
+//   }
+// }
+.table{
+  --bs-table-hover-color: var(--my-bg-white);
+  --bs-table-hover-bg: var(--my-primary)
+}
+

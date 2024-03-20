@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Tamma+2:wght@600&family=Noto+Sans+TC:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500&display=swap');
+
+:root{
+  --my-primary:#A7775C;
+  --my-wraning:#f9ca3f;
+  --my-success:#8de02c;
+  // --my-secondary:#858377;
+  // --my-hover:#FF785E;
+  // --my-gray:#494846 ;
+  // --my-gray2:#636057 ;
+  --my-bg-white:#F8F9FA;
+}
+
+
+  // --primary:#003147;
+  // --secondary:#03a9f4;
+  // --white:#fff;
+  // --white-100:#f5f5f5;
+  // --red:#F00;
+  // --black:#111;
+  // --gray:#999;
+  // --wraning:#f9ca3f;
+  // --success:#8de02c;
+  // --wrap-padding: 20px;
+
+
+.text-ellipsis {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.bg-gray-1 {
+  background-color: #EEEDF3;
+}
+
+.scroll-container {
+  display: block;
+  width: 350px;
+  height: 200px;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+
+.dashed {
+  border: none;
+  height: 1px;
+  background: #000;
+  background: repeating-linear-gradient(90deg, #000, #000 6px, transparent 6px, transparent 12px);
+}
+
+.scorllbar {
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.scorllbar::-webkit-scrollbar {
+  width: 6px;
+  padding: 5px;
+}
+
+.scorllbar:hover::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px #cccccc;
+
+  /* background: #ffffff;  */
+}
+
+.scorllbar:hover::-webkit-scrollbar-thumb {
+  background: #bfbfbf;
+  border-radius: 60px;
+  background: linear-gradient(left, #96A6BF, #63738C);
+  box-shadow: inset 0 0 1px 1px #5C6670;
+}
+
+
+.box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);  
+  width: 400px;
+  padding: 40px;
+  background-color: black;
+  opacity: 0.8;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, .5);
+  border-radius: 10px;
+}
+
+.box h2 {
+  color: #fff;
+  text-align: center;
+  margin: 0 0 30px;
+  padding: 0;
+
+}
+
+.box .inputbox {
+  position: relative;
+}
+
+
+.box .inputbox input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px #fff solid;
+  outline: none;
+  background-color: transparent;
+}
+
+.box .inputbox label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #fff;
+  font-size: 18px;
+  pointer-events: none;
+  transition: .5s;
+}
+
+.box .inputbox input:focus~label,
+.box .inputbox input:valid~label {
+  top: -18px;
+  left: 0;
+  color: #03a9f4;
+  font-size: 14px;
+}
+
+.box input[type="submit"] {
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #fff;
+  background: #03a9f4;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+
+}
+
+
+input[type="radio"]{
+  visibility: hidden;
+  &:checked + label{
+    background-color: #A7775C;
+    border: 1px solid #A7775C;}
+  }

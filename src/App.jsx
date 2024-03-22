@@ -46,7 +46,7 @@ function App() {
         <Route path="/menu" component={Menu} />
       </Route>
       <Route path="/*404" component={() => <h1>Page Not Found</h1>} />
-     
+   
     </>
   );
 }

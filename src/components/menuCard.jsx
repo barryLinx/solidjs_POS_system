@@ -1,6 +1,8 @@
 import { createSignal } from "solid-js"
 import formatNumber from "../helper/formatNumber";
 import billStore from "../store/billStore";
+import {addAlertNotify,addSuccesstNotify} from '../helper/notifyToast';
+//import toast from 'solid-toast';
 
 function menuCard({categoryData,addToBills}) {
   const { setBills, bills } = billStore;
@@ -14,13 +16,24 @@ function menuCard({categoryData,addToBills}) {
   const [sugar, setSugar] = createSignal("");
   const [ice, setIce] = createSignal("");
 
+  // const addAlertNotify = () => toast.error('請選擇 mood, size, sugar, ice',{
+  //   duration: 2000,
+  //   position: 'top-center',    
+  // });
+  
+  // const addSuccesstNotify = () => toast.success('加入成功',{
+  //   duration: 2000,
+  //   position: 'top-center',    
+  // });
+
 function addToBillsHandler(category) {
     // console.log("mood", mood());
     // console.log("size", size());
     // console.log("sugar", sugar());
     // console.log("ice", ice());
     if (!mood() || !sugar() || !size() || !ice()) {
-      alert("Please select mood, size, sugar, ice");
+      //alert("Please select mood, size, sugar, ice");
+      addAlertNotify()
       return;
     }
    
@@ -42,6 +55,7 @@ function addToBillsHandler(category) {
           },
         ];
     });
+    addSuccesstNotify()
     setMoodId("");
     setSizeId("");
     setSugarId("");
@@ -265,6 +279,7 @@ function addToBillsHandler(category) {
           </div>
         </div>
       </div>
+   
     </>
   );
 }

@@ -1,7 +1,7 @@
 import { createSignal, createEffect } from "solid-js";
 import { redirect, useNavigate } from "@solidjs/router";
 import authStore from "../store/authStore";
-//import customFetch from "../helper/customFetch";
+import customFetch from "../helper/customFetch";
 
 function Login() {
   const { localAccessToken,userName ,setUserName ,setLocalAccessToken} = authStore; 
@@ -17,9 +17,9 @@ createEffect(() => {
 
   const handleLogin =async (e) => {
     e.preventDefault();
-    console.log(userName(), passWord())
+    //console.log(userName(), passWord())
     try {
-      const response = await fetch("http://127.0.0.1:3000/api/auth/login", {
+      const response = await customFetch("api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

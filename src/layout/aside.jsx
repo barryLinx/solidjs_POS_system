@@ -9,6 +9,7 @@ function aside() {
   const { userName } = authStore;
   const { bills,editBill } = billStore;
   const [moneyComputed, setMoneyComputed] = createSignal(0);
+  const [current, setCurrent] = createSignal('cash');
 
   const Subtotal = createMemo(() => {
     const total = bills().reduce(
@@ -57,35 +58,7 @@ function aside() {
             {(bill, i) => (
               <>
               <BillCard billData={bill}/>
-               {/* <div class="col-md">             
-                  <div class="d-flex justify-content-start">                
-                    <div class="me-2">
-                      <img
-                        class="object-fit-cover rounded-4"
-                        src={bill.imgUrl}
-                        style="width: 65px; height: 55px;"
-                      />
-                    </div>                   
-                    <div class="d-flex flex-column me-1">
-                      <p class="ms-2 mb-1 fw-bold">{bill.name}</p>
-                      <p class="ms-2 fs-6 d-flex justify-content-between">
-                        <span class="me-3">
-                          {" "}
-                          &#215;&nbsp; <b>{bill.quantity}</b>
-                        </span>
-                        <button class="p-2 me-4 badge text-primary bg-light border-0"  data-bs-toggle="modal" data-bs-target="#exampleModal">
-                          notes <i class="fas fa-pencil-alt"></i>
-                        </button>
-                      </p>
-                    </div>                   
-                    <div class="d-flex justify-content-center align-items-center fw-bold fs-5 text-secondary">
-                      <span class="fw-bold fs-5 text-secondary">
-                        <sup>NT</sup>
-                        {bill.price}
-                      </span>
-                    </div>                   
-                  </div>                  
-                </div> */}
+              
               </>
             )}
           </For>
@@ -129,6 +102,8 @@ function aside() {
         <button
           class="btn btn-outline-primary d-inline-flex flex-column align-items-center py-2 px-2 me-3"
           style="height: 5.5rem; width: 5.5rem;"
+          classList={{ active: current() === 'cash' }}
+          onClick={()=>setCurrent('cash')}
         >
           <i class="fs-1 mb-2 fas fa-money-bill-alt"></i>
           <b class="fs-5 text-nowrap">現金</b>
@@ -136,6 +111,8 @@ function aside() {
         <button
           class="btn btn-outline-primary d-inline-flex flex-column align-items-center py-2 px-2 me-3"
           style="height: 5.5rem; width: 5.5rem;"
+          classList={{ active: current() === 'credit' }}
+          onClick={()=>setCurrent('credit')}
         >
           <i class="fs-1 mb-2 far fa-credit-card "></i>
           <b class="fs-5 text-nowrap">信用卡</b>
@@ -143,6 +120,8 @@ function aside() {
         <button
           class="btn btn-outline-primary d-inline-flex flex-column align-items-center py-2 px-2 "
           style="height: 5.5rem; width: 5.5rem;"
+          classList={{ active: current() === 'payOnline' }}
+          onClick={()=>setCurrent('payOnline')}
         >
           <i class="fs-1 mb-2 fas fa-wallet "></i>
           <b class="fs-5 text-nowrap ">電子支付</b>

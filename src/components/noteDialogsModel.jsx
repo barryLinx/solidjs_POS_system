@@ -1,6 +1,20 @@
 import { createMemo, createEffect, createSignal } from "solid-js";
 
 import billStore from "../store/billStore";
+import {editSuccessNotify,deleteNotify} from '../helper/notifyToast'
+// import toast from 'solid-toast';
+
+// const editSuccessNotify = ()=>toast.success('已修改成功!',{
+//   duration: 2000,
+//   position: 'top-center',
+
+// });
+
+// const deleteNotify = ()=>toast.success('已刪除!',{
+//   duration: 2000,
+//   position: 'top-center',
+
+// });
 
 function noteDialogsModel({ billEdit }) {
   const {
@@ -19,17 +33,19 @@ function noteDialogsModel({ billEdit }) {
     setQuantityEdit,
   } = billStore;
 
+  
   function deleteHandler() {
     setBills((currentBills) => {
       const index = currentBills.findIndex((bill) => bill.id === billEdit.id);
       currentBills.splice(index, 1);
       return [...currentBills];
     });
+    deleteNotify();
   }
 
   function saveHandler() {
     //let bId = billEdit.id;
-    console.log("editBill().id: ", editBill().id);
+   // console.log("editBill().id: ", editBill().id);
     if (quantityEdit() <= 0) {
       alert("數量不可為 0");
       return;
@@ -54,10 +70,12 @@ function noteDialogsModel({ billEdit }) {
         }
       });
     });
+    editSuccessNotify();
   }
 
   return (
     <>
+  
       <div
         class="modal fade popup"
         id="exampleModal"
@@ -67,17 +85,19 @@ function noteDialogsModel({ billEdit }) {
       >
         <div class="modal-dialog modal-dialog-centered  ">
           <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">
-                Modal title
+            <div class="modal-header bg-primary text-white">
+              <h1 class="modal-title fs-3 " >
+               商品
               </h1>
               <button
                 type="button"
-                class="btn-close"
+                class="btn btn-primary text-white p-3"
                 data-bs-dismiss="modal"
                 aria-label="Close"
                 onClick={() => revertBillData()}
-              ></button>
+              >
+                <i class="fas fa-times"></i>
+              </button>
             </div>
             <div class="modal-body">
               {/* <!-- Card --> */}
@@ -268,7 +288,7 @@ function noteDialogsModel({ billEdit }) {
                 </div>
                 {/* <!--  Card-body End--> */}
               </div>
-              <div class="modal-footer">
+              <div class="modal-footer d-flex justify-content-between">
                 <button
                   type="button"
                   class="btn btn-danger"
@@ -290,6 +310,7 @@ function noteDialogsModel({ billEdit }) {
           </div>
         </div>
       </div>
+      
     </>
   );
 }

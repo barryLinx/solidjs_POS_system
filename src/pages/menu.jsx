@@ -40,7 +40,7 @@ function menu() {
     if (!localAccessToken()) {
       return;
     }
-    const response = await customFetch("http://127.0.0.1:3000/api/MenuData", {
+    const response = await customFetch("api/MenuData", {
       method: "get",
       headers: {
         "Content-Type": "application/json",

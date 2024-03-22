@@ -32,7 +32,7 @@ function Home() {
       if(!localAccessToken()){
         return;
       }
-      const response = await customFetch("http://127.0.0.1:3000/api/salesData", {
+      const response = await customFetch("api/salesData", {
         method: "get",
         headers: {
           "Content-Type": "application/json",

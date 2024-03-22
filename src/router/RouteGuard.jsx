@@ -3,7 +3,7 @@ import { createEffect, createMemo, Show } from "solid-js";
 import Sidebars from "../layout/sidebars";
 import { useNavigate } from "@solidjs/router";
 import authStore from "../store/authStore";
-
+import { Toaster } from 'solid-toast';
 
 const RouteGuard = (props) => {
   const navigate = useNavigate();
@@ -29,6 +29,7 @@ const RouteGuard = (props) => {
           {props.children}
           
         </div>
+        <Toaster/>
       </div>
     </>
   );

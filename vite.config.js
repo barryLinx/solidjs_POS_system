@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite';
+import { defineConfig ,loadEnv } from 'vite';
 import solid from 'vite-plugin-solid';
 import {resolve} from 'path';
 

@@ -40,7 +40,7 @@ function menu() {
     if (!localAccessToken()) {
       return;
     }
-    const response = await customFetch("api/MenuData", {
+    const response = await customFetch("api/getMenuData", {
       method: "get",
       headers: {
         "Content-Type": "application/json",

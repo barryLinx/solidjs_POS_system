@@ -24,4 +24,11 @@ const deleteNotify = ()=>toast.success('已刪除!',{
 
 });
 
-export { addAlertNotify, addSuccesstNotify ,editSuccessNotify,deleteNotify};
+
+const  notAuthorized = ()=>toast.error("You are not authorized to access this page",{
+  duration: 2000,
+  position: 'top-center',
+
+});
+
+export { addAlertNotify, addSuccesstNotify ,editSuccessNotify,deleteNotify,notAuthorized};

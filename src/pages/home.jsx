@@ -32,7 +32,7 @@ function Home() {
       if(!localAccessToken()){
         return;
       }
-      const response = await customFetch("api/salesData", {
+      const response = await customFetch("api/getSalesData", {
         method: "get",
         headers: {
           "Content-Type": "application/json",

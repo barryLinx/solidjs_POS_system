@@ -35,6 +35,7 @@ createEffect(() => {
       // 更新資料
       localStorage.setItem("localAccessToken", jsonData.accessToken);
       setLocalAccessToken(jsonData.accessToken);
+    //  setUserRole(jsonData.userRole);
       navigate("/home", { replace: true });
     } catch (error) {
       console.error("Error fetching data:", error);

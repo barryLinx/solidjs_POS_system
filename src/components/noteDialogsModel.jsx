@@ -1,7 +1,7 @@
 import { createMemo, createEffect, createSignal } from "solid-js";
 
 import billStore from "../store/billStore";
-import {editSuccessNotify,deleteNotify} from '../helper/notifyToast'
+import {editSuccessNotify,deleteNotify} from '../helper/notifyToast';
 // import toast from 'solid-toast';
 
 // const editSuccessNotify = ()=>toast.success('已修改成功!',{
@@ -20,7 +20,6 @@ function noteDialogsModel({ billEdit }) {
   const {
     setBills,
     editBill,
-    revertBillData,
     iceEdit,
     setIceEdit,
     moodEdit,
@@ -94,7 +93,7 @@ function noteDialogsModel({ billEdit }) {
                 class="btn btn-primary text-white p-3"
                 data-bs-dismiss="modal"
                 aria-label="Close"
-                onClick={() => revertBillData()}
+                // onClick={() => revertBillData()}
               >
                 <i class="fas fa-times"></i>
               </button>

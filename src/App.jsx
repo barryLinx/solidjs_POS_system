@@ -1,23 +1,53 @@
 import { Route,useNavigate  } from "@solidjs/router";
-import { onMount, onCleanup } from "solid-js";
+import { lazy  } from "solid-js";
 //import billStore from "./store/billStore";
-import Home from "./pages/home";
-import Menu from "./pages/menu";
-import Login from "./pages/login";
-import Seting from "./pages/seting";
+// import Home from "./pages/home";
+// import Menu from "./pages/menu";
+// import Login from "./pages/login";
+// import Seting from "./pages/seting";
 import RouteGuard from "./router/RouteGuard";
+
+const Menu = lazy(() => import("./pages/menu"));
+const Home = lazy(() => import("./pages/home"));
+const Login = lazy(() => import("./pages/login"));
+const Seting = lazy(() => import("./pages/seting"));
+
 import authStore from "./store/authStore";
 
 function App() {
   const {userRole, setUSerRole } = authStore; 
-  //監聽點擊事件，用於判斷是否點擊了空白處，清空帳數據
-  // const handleClickOutside = (event) => {
-  //   const popupElement = document.querySelector(".popup");
-  //   if (popupElement && !popupElement.contains(event.target)) {
-  //      revertBillData();
-  //     console.log("editBill", editBill());
+
+  // const routes=[
+  //   {
+  //     path: "/login",
+  //     component: lazy(()=>Login),
+  //   },
+    
+  //   {
+  //     path: "/*all",
+  //     component: lazy(() => import("./pages/notFound404")),
+  //   },
+  //   {
+  //     path: "/",
+  //     component: lazy(() => RouteGuard ),
+  //     children: [
+  //       {
+  //         path: "/home",
+  //         component:lazy(()=>Home)
+  //       },
+  //       {
+  //         path: "/menu",
+  //         component:lazy(()=>Menu)
+  //       },
+  //       {
+  //         path: "/settings",
+  //         component: lazy(() => Seting ),
+  //         //filter: requireAdmin, // 增加 matchFilters 屬性，將 requireAdmin 函數傳入
+  //       },
+  //     ]
   //   }
-  // };
+  // ];
+
   const requireAdmin = () => {
     const navigate = useNavigate();
     if (userRole() !== 'admin') {
@@ -26,28 +56,11 @@ function App() {
     }
     return true;
   };
+ 
   
-  // onMount(() => {
-  //   // 當組件掛載時，添加點擊監聽
-  //  // document.addEventListener("click", handleClickOutside);
-  //   const myModalEl = document.getElementById("exampleModal");
-  //   myModalEl.addEventListener("hidden.bs.modal", () => {
-  //     // do something...
-  //     revertBillData();
-  //     //console.log("editBill", editBill());
-  //   });
-  // });
-
-  // onCleanup(() => {
-  //   // 組件卸載時，移除點擊監聽
-  //   //document.removeEventListener("click", handleClickOutside);
-  //   const myModalEl = document.getElementById("exampleModal");
-  //   if(myModalEl) {
-  //     myModalEl.removeEventListener("hidden.bs.modal");
-  //   }
-  // });
   return (
     <>
+   
       <Route path="/login" component={Login} />
       <Route path="/" component={RouteGuard}>
         <Route path="/home" component={Home} />

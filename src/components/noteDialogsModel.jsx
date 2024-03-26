@@ -2,19 +2,7 @@ import { createMemo, createEffect, createSignal } from "solid-js";
 
 import billStore from "../store/billStore";
 import {editSuccessNotify,deleteNotify} from '../helper/notifyToast';
-// import toast from 'solid-toast';
 
-// const editSuccessNotify = ()=>toast.success('已修改成功!',{
-//   duration: 2000,
-//   position: 'top-center',
-
-// });
-
-// const deleteNotify = ()=>toast.success('已刪除!',{
-//   duration: 2000,
-//   position: 'top-center',
-
-// });
 
 function noteDialogsModel({ billEdit }) {
   const {
@@ -82,7 +70,7 @@ function noteDialogsModel({ billEdit }) {
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog modal-dialog-centered  ">
+        <div class="modal-dialog modal-dialog-centered  modal-lg  modal-dialog-scrollable">
           <div class="modal-content">
             <div class="modal-header bg-primary text-white">
               <h1 class="modal-title fs-3 " >
@@ -99,21 +87,20 @@ function noteDialogsModel({ billEdit }) {
               </button>
             </div>
             <div class="modal-body">
-              {/* <!-- Card --> */}
+              {/* <!--Card--> */}
               <div class="card-wrap d-flex flex-column p-4 bg-light rounded-5">
                 {/* <!--Card-header--> */}
-                <div class=" d-flex align-items-md-start">
-                  <div class="img-wrap me-3">
+                <div class=" d-flex justify-content-between align-items-md-start">
+                  <div class="me-3 w-75 h-100">
                     <img
-                      class="rounded-5 object-fit-cover"
-                      style="height: 10rem; width: 8rem;"
+                      class="rounded-5 object-fit-cover w-75"
+                      style="height: 12rem;"
                       src={billEdit.imgUrl}
-                      alt=""
                     />
                   </div>
-                  <div class="info" style="width: 12rem;">
+                  <div class="info w-50">
                     <h4 class="text-wrap">{billEdit.name}</h4>
-                    <p class="text-ellipsis">{billEdit.description}</p>
+                    <p class="text-ellipsis">{billEdit.describe}</p>
                     <p class="fs-4">
                       <sup>NT</sup>
                       {billEdit.price}

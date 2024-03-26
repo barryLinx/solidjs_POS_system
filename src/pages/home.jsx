@@ -148,7 +148,7 @@ function Home() {
                   )}
                 </For>
 
-                <tr>
+                {/* <tr>
                   <th class="fs-4" scope="row">
                     冰淇淋
                   </th>
@@ -287,7 +287,7 @@ function Home() {
                   <td>
                     <span class="fs-5 badge text-bg-success">完成</span>
                   </td>
-                </tr>
+                </tr> */}
               </tbody>
             </table>
           </div>

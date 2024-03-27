@@ -12,14 +12,14 @@ import authStore from "./store/authStore";
 
 function App() {
   const { userRole, setUSerRole } = authStore;
-  const requireAdmin = () => {
-    const navigate = useNavigate();
-    if (userRole() !== "admin") {
-      navigate("/home"); // 如果不是 admin，重定向到首页
-      return false; // 阻止路由繼續
-    }
-    return true;
-  };
+  // const requireAdmin = () => {
+  //   const navigate = useNavigate();
+  //   if (userRole() !== "admin") {
+  //     navigate("/home"); // 如果不是 admin，重定向到首页
+  //     return false; // 阻止路由繼續
+  //   }
+  //   return true;
+  // };
 
   return (
     <>
@@ -27,7 +27,7 @@ function App() {
       <Route path="/" component={RouteGuard}>
         <Route path="/home" component={Home} />
         <Route path="/menu" component={Menu} />
-        <Route path="/setting" component={Seting} matchFilters={requireAdmin} />
+        <Route path="/setting" component={Seting}  />
       </Route>
       <Route path="/*404" component={NotFound} />
     </>

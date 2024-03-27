@@ -1,5 +1,5 @@
 // src/components/ProtectedRoute.js
-import { createEffect, createMemo, Show } from "solid-js";
+import { createEffect, createMemo} from "solid-js";
 import Sidebars from "../layout/sidebars";
 import { useNavigate } from "@solidjs/router";
 import authStore from "../store/authStore";
@@ -10,7 +10,7 @@ const RouteGuard = (props) => {
   const { localAccessToken, userName } = authStore;
 
   //如果用户未登錄，重定向到login頁面
-  createMemo(() => {
+  createEffect(() => {
     //沒有 localAccessToken 就跳轉到 login頁面
     // console.log("redirect", "redirect");
     //console.log("localAccessToken", localAccessToken);

@@ -24,11 +24,11 @@ function App() {
   return (
     <>  
       <Route path="/login" component={Login} />
-      <Route path="/" component={RouteGuard}>
+      {/* <Route path="/" component={RouteGuard}></Route> */}
         <Route path="/home" component={Home} />
         <Route path="/menu" component={Menu} />
         <Route path="/setting" component={Seting} matchFilters={requireAdmin} />
-      </Route>
+      
       <Route path="/*404" component={NotFound} />
    
     </>

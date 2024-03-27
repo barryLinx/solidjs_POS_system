@@ -6,7 +6,10 @@ import { resolve } from "path";
 
 export default defineConfig({
   plugins: [solid({ adapter: vercel({ edge: true }) })],
-  //base: '/solidjs_POS_system/dist/',
+  build: {
+    target: 'esnext',
+    polyfillDynamicImport: false,
+  },
   resolve: {
     alias: {
       "@": resolve(__dirname, "src"),

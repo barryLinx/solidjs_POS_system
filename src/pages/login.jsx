@@ -31,15 +31,19 @@ createEffect(() => {
           password: passWord(),
         }),
       });
-      const jsonData = await response.json();
+      //
 
-      console.log("Login",jsonData);
+      console.log("Login",response);
       // 更新資料
+   
+    //  setUserRole(jsonData.userRole);
+    if(response.ok){
+      const jsonData = await response.json();
       localStorage.setItem("localAccessToken", jsonData.accessToken);
       setLocalAccessToken(jsonData.accessToken);
-    //  setUserRole(jsonData.userRole);
-    if(response.ok){navigate("/home", { replace: true });}
-    if(response.status==401 && jsonData.statusCustom == 4001){
+      navigate("/home", { replace: true });
+    }
+    if(response.status == 401){
       loginErrorNotify();
     }
       

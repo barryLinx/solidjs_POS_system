@@ -16,11 +16,12 @@ async function customFetch(url, options = {}) {
     credentials: "include", // 確保cookie被發送
   };
   let response = await fetch(baseURL + url, updatedOptions);
-  console.log("response :", response);
-  let resJson =await response.json();
+  //console.log("response :", response);
+  //let resJson = await response.json();
 
-  //  console.log("resJson :", resJson);
-  if (response.status == 401 && resJson.statusCustom === 4002) {
+  //console.log("resJson :", resJson);
+
+  if (response.status === 402) {
     console.log("not ok response :", response);
     localStorage.setItem("localAccessToken", "");
 
@@ -50,16 +51,17 @@ async function customFetch(url, options = {}) {
       //   redirect: "/login",
       //   msg: "重新登入 ",
       // });
-    } else {
-      //跳轉到 login 頁面
-      return Promise.reject({
-        redirect: "/login",
-        msg: "帳號密碼錯誤",
-        statusCustom: 4001, //
-      });
+      } 
+      //else {
+    // //   //跳轉到 login 頁面
+    // //   return Promise.reject({
+    // //     redirect: "/login",
+    // //     msg: "帳號密碼錯誤",
+    // //     statusCustom: 4001, //
+    // //   });
 
      
-    }
+   // }
   }
   return response; // 返回原始請求回應(如果有)
 }

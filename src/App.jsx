@@ -5,7 +5,8 @@ const RouteGuard = lazy(() => import("./router/RouteGuard"));
 const Menu = lazy(() => import("./pages/menu"));
 const Home = lazy(() => import("./pages/home"));
 const Login = lazy(() => import("./pages/login"));
-const Seting = lazy(() => import("./pages/seting"));
+//const Setting = lazy(() => import("./pages/seting"));
+import Setting from "./pages/seting";
 const NotFound = lazy(() => import("./pages/notFound404"));
 
 import authStore from "./store/authStore";
@@ -27,7 +28,7 @@ function App() {
       <Route path="/" component={RouteGuard}>
         <Route path="/home" component={Home} />
         <Route path="/menu" component={Menu} />
-        <Route path="/setting" component={Seting} matchFilters={requireAdmin} />
+        <Route path="/setting" component={Setting} matchFilters={requireAdmin} />
       </Route>
       <Route path="/*404" component={NotFound} />
     </>

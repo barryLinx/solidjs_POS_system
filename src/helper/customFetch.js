@@ -25,7 +25,7 @@ async function customFetch(url, options = {}) {
     localStorage.setItem("localAccessToken", "");
 
     const refreshResponse = await fetch(
-      `${process.env.VERCEL_URL}/api/auth/refresh`,
+      `${baseURL}/api/auth/refresh`,
       {
         method: "GET",
         headers: {

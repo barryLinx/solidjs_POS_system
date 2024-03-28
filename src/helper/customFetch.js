@@ -17,10 +17,10 @@ async function customFetch(url, options = {}) {
   };
   let response = await fetch(baseURL + url, updatedOptions);
   console.log("response :", response);
-  //   let resJson =await response.json();
+  let resJson =await response.json();
 
   //  console.log("resJson :", resJson);
-  if (response.status == 401) {
+  if (response.status == 401 && resJson.statusCustom === 4002) {
     console.log("not ok response :", response);
     localStorage.setItem("localAccessToken", "");
 
@@ -51,10 +51,11 @@ async function customFetch(url, options = {}) {
       //   msg: "重新登入 ",
       // });
     } else {
-      // 更新 refreshToken refresh failed ，跳轉到 login 頁面
+      //跳轉到 login 頁面
       return Promise.reject({
         redirect: "/login",
-        msg: " refreshToken refresh failed，重新登入",
+        msg: "帳號密碼錯誤",
+        statusCustom: 4001, //
       });
 
      

@@ -39,7 +39,7 @@ createEffect(() => {
       setLocalAccessToken(jsonData.accessToken);
     //  setUserRole(jsonData.userRole);
     if(response.ok){navigate("/home", { replace: true });}
-    if(response.status==401){
+    if(response.status==401 && jsonData.statusCustom == 4001){
       loginErrorNotify();
     }
       

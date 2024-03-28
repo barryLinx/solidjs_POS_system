@@ -7,6 +7,12 @@ const addAlertNotify = () => toast.error('請選擇 mood, size, sugar, ice',{
   position: 'top-center',    
 });
 
+const loginErrorNotify = () => toast.error('請檢查密碼或帳號',{
+  duration: 2000,
+  position: 'top-center',    
+});
+
+
 const addSuccesstNotify = () => toast.success('加入成功',{
   duration: 2000,
   position: 'top-center',    
@@ -31,4 +37,4 @@ const  notAuthorized = ()=>toast.error("You are not authorized to access this pa
 
 });
 
-export { addAlertNotify, addSuccesstNotify ,editSuccessNotify,deleteNotify,notAuthorized};
+export { loginErrorNotify,addAlertNotify, addSuccesstNotify ,editSuccessNotify,deleteNotify,notAuthorized};

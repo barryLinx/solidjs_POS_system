@@ -1,10 +1,10 @@
 import { createMemo, createEffect, createSignal } from "solid-js";
 
 import billStore from "../store/billStore";
-import {editSuccessNotify,deleteNotify} from '../helper/notifyToast';
+import { editSuccessNotify, deleteNotify } from "../helper/notifyToast";
 
-
-function noteDialogsModel({ billEdit }) {
+function noteDialogsModel() {
+  
   const {
     setBills,
     editBill,
@@ -20,10 +20,9 @@ function noteDialogsModel({ billEdit }) {
     setQuantityEdit,
   } = billStore;
 
-  
   function deleteHandler() {
     setBills((currentBills) => {
-      const index = currentBills.findIndex((bill) => bill.id === billEdit.id);
+      const index = currentBills.findIndex((bill) => bill.id === editBill().id);
       currentBills.splice(index, 1);
       return [...currentBills];
     });
@@ -32,7 +31,7 @@ function noteDialogsModel({ billEdit }) {
 
   function saveHandler() {
     //let bId = billEdit.id;
-   // console.log("editBill().id: ", editBill().id);
+    // console.log("editBill().id: ", editBill().id);
     if (quantityEdit() <= 0) {
       alert("數量不可為 0");
       return;
@@ -62,8 +61,7 @@ function noteDialogsModel({ billEdit }) {
 
   return (
     <>
-  
-      <div
+            <div
         class="modal fade popup"
         id="exampleModal"
         tabindex="-1"
@@ -73,9 +71,7 @@ function noteDialogsModel({ billEdit }) {
         <div class="modal-dialog modal-dialog-centered  modal-lg  modal-dialog-scrollable">
           <div class="modal-content">
             <div class="modal-header bg-primary text-white">
-              <h1 class="modal-title fs-3 " >
-               商品
-              </h1>
+              <h1 class="modal-title fs-3 ">商品</h1>
               <button
                 type="button"
                 class="btn btn-primary text-white p-3"
@@ -95,15 +91,15 @@ function noteDialogsModel({ billEdit }) {
                     <img
                       class="rounded-5 object-fit-cover w-75"
                       style="height: 12rem;"
-                      src={billEdit.imgUrl}
+                      src={editBill().imgUrl}
                     />
                   </div>
                   <div class="info w-50">
-                    <h4 class="text-wrap">{billEdit.name}</h4>
-                    <p class="text-ellipsis">{billEdit.describe}</p>
+                    <h4 class="text-wrap">{editBill().name}</h4>
+                    <p class="text-ellipsis">{editBill().describe}</p>
                     <p class="fs-4">
                       <sup>NT</sup>
-                      {billEdit.price}
+                      {editBill().price}
                     </p>
                   </div>
                 </div>
@@ -252,7 +248,7 @@ function noteDialogsModel({ billEdit }) {
                       <input
                         type="number"
                         class="form-control text-center"
-                        value={quantityEdit() <=0 ? 1 : quantityEdit()}
+                        value={quantityEdit() <= 0 ? 1 : quantityEdit()}
                         onChange={(e) => setQuantityEdit(e.target.value)}
                       />
                       <button
@@ -266,9 +262,7 @@ function noteDialogsModel({ billEdit }) {
                       </button>
                     </div>
                     <p class="text-danger">
-                      {quantityEdit() < 1
-                        ? "數量必須大於 0"
-                        : ""}
+                      {quantityEdit() < 1 ? "數量必須大於 0" : ""}
                     </p>
                   </div>
                 </div>
@@ -296,7 +290,6 @@ function noteDialogsModel({ billEdit }) {
           </div>
         </div>
       </div>
-      
     </>
   );
 }

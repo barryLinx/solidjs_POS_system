@@ -2,6 +2,8 @@ import { createSignal, createEffect } from "solid-js";
 import { redirect, useNavigate } from "@solidjs/router";
 import authStore from "../store/authStore";
 import customFetch from "../helper/customFetch";
+import {loginErrorNotify} from "../helper/notifyToast"
+import { Toaster } from 'solid-toast';
 
 function Login() {
   const { localAccessToken,userName ,setUserName ,setLocalAccessToken} = authStore; 
@@ -18,7 +20,7 @@ createEffect(() => {
   const handleLogin =async (e) => {
     e.preventDefault();
     //console.log(userName(), passWord())
-    //try {
+   // try {
       const response = await customFetch("api/auth/login", {
         method: "POST",
         headers: {
@@ -36,7 +38,11 @@ createEffect(() => {
       localStorage.setItem("localAccessToken", jsonData.accessToken);
       setLocalAccessToken(jsonData.accessToken);
     //  setUserRole(jsonData.userRole);
-      navigate("/home", { replace: true });
+    if(response.ok){navigate("/home", { replace: true });}
+    if(response.status==401){
+      loginErrorNotify();
+    }
+      
     // } catch (error) {
     //   console.error("Error fetching data:", error);
     //   navigate("/*", { replace: true });
@@ -85,7 +91,9 @@ createEffect(() => {
           />
         </form>
       </div>
+      <Toaster/>
     </div>
+    
   );
 }
 

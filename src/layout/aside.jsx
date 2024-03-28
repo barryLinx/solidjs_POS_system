@@ -1,9 +1,11 @@
-import { createMemo, For, createSignal } from "solid-js";
+import { createMemo, For, createSignal ,lazy} from "solid-js";
 import authStore from "../store/authStore";
 import billStore from "../store/billStore";
 import formatNumber from "../helper/formatNumber";
-import BillCard from "../components/billCard";
-import NoteDialogsModel from "../components/noteDialogsModel";
+// import BillCard from "../components/billCard";
+// import NoteDialogsModel from "../components/noteDialogsModel";
+const NoteDialogsModel =lazy(() => import("../components/noteDialogsModel"));
+const BillCard = lazy(() => import("../components/billCard"));
 
 function aside() {
   const { userName } = authStore;
@@ -28,7 +30,7 @@ function aside() {
         {/* <!-- Cashier login--> */}
         <div class="d-flex justify-content-center align-items-center">
           <img
-            src="https://placehold.co/500x400"
+            src="https://placehold.co/600x400"
             class="object-fit-cover rounded-4 me-3"
             style="width: 70px; height: 70px;"
           />
@@ -131,7 +133,7 @@ function aside() {
 
       <button class="mt-4 btn btn-primary d-block w-100 fs-4">列印帳單</button>
     </div>
-    <NoteDialogsModel billEdit={editBill()} />
+    <NoteDialogsModel/>
     </>
     
   );

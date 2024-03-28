@@ -1,4 +1,4 @@
-//import { createMemo, createEffect, createSignal } from "solid-js";
+import { createSignal } from "solid-js";
 import billStore from "../store/billStore";
 
 function billCards({ billData }) {
@@ -12,7 +12,7 @@ function billCards({ billData }) {
     setQuantityEdit,
   } = billStore;
 
-  //createEffect(() => {});
+
 
   function editBillhandle() {
     let { mood, ice, size, sugar, quantity } = billData;
@@ -23,6 +23,8 @@ function billCards({ billData }) {
     setQuantityEdit(quantity);
     //.log("billData", billData);
     setEditBill((bill) => ({ ...bill, ...billData }));
+
+
     console.log("editBill", editBill());
   }
 
@@ -52,6 +54,7 @@ function billCards({ billData }) {
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
                 onClick={() => editBillhandle()}
+                
               >
                 notes <i class="fas fa-pencil-alt"></i>
               </button>

@@ -44,17 +44,6 @@ function Home() {
       console.log("Home jsonData", jsonData);
       setDailySales(jsonData);
 
-// try {
-      // console.log("dailySales",dailySales());
-    // } catch (error) {
-    //   console.error("Failed to fetch daily sales data:", error);
-    //   localStorage.setItem("localAccessToken", "");
-    //   setLocalAccessToken('');
-    //   navigate("/*404", { replace: true });
-    //   //navigate("/login", { replace: true });
-    // }
-
-    //salesData
   });
 
   return (

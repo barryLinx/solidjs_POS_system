@@ -25,11 +25,11 @@ function App() {
     <>
     <Route path="/login" component={Login} />
       <Route path="/" component={RouteGuard}>
-        <Route path="/" component={Home} />
+        <Route path="/home" component={Home} />
         <Route path="/menu" component={Menu} />
         <Route path="/setting" component={Seting} matchFilters={requireAdmin} />
       </Route>
-      <Route path="/*all" component={NotFound} />
+      <Route path="/*" component={NotFound} />
     </>
   );
 }

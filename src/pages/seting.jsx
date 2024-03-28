@@ -25,7 +25,7 @@ function setting() {
     setUserList(jsonData);
     if (response?.status == 403) {
       notAuthorized();
-      navigate("/", { replace: true });
+      navigate("/home", { replace: true });
     }
   }
 

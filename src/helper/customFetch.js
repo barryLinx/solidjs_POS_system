@@ -57,9 +57,10 @@ async function customFetch(url, options = {}) {
         msg: " refreshToken refresh failed，重新登入",
       });
 
-      return response; // 返回原始請求回應(如果有)
+     
     }
   }
+  return response; // 返回原始請求回應(如果有)
 }
 export default customFetch;
 

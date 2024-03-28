@@ -18,7 +18,7 @@ createEffect(() => {
   const handleLogin =async (e) => {
     e.preventDefault();
     //console.log(userName(), passWord())
-    try {
+    //try {
       const response = await customFetch("api/auth/login", {
         method: "POST",
         headers: {
@@ -37,10 +37,10 @@ createEffect(() => {
       setLocalAccessToken(jsonData.accessToken);
     //  setUserRole(jsonData.userRole);
       navigate("/home", { replace: true });
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      navigate("/*", { replace: true });
-    }
+    // } catch (error) {
+    //   console.error("Error fetching data:", error);
+    //   navigate("/*", { replace: true });
+    // }
   }
    
   

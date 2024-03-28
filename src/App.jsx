@@ -15,7 +15,7 @@ function App() {
   const requireAdmin = () => {
     const navigate = useNavigate();
     if (userRole() !== "admin") {
-      navigate("/home"); // 如果不是 admin，重定向到首页
+      navigate("/"); // 如果不是 admin，重定向到首页
       return false; // 阻止路由繼續
     }
     return true;
@@ -29,7 +29,7 @@ function App() {
         <Route path="/menu" component={Menu} />
         <Route path="/setting" component={Seting} matchFilters={requireAdmin} />
       </Route>
-      <Route path="/*404" component={NotFound} />
+      <Route path="/*all" component={NotFound} />
     </>
   );
 }

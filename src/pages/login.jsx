@@ -36,10 +36,10 @@ createEffect(() => {
       localStorage.setItem("localAccessToken", jsonData.accessToken);
       setLocalAccessToken(jsonData.accessToken);
     //  setUserRole(jsonData.userRole);
-      navigate("/home", { replace: true });
+      navigate("/", { replace: true });
     } catch (error) {
       console.error("Error fetching data:", error);
-      navigate("/*404", { replace: true });
+      navigate("/*all", { replace: true });
     }
   }
    

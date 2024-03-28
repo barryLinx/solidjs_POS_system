@@ -16,15 +16,6 @@ function menuCard({categoryData,addToBills}) {
   const [sugar, setSugar] = createSignal("");
   const [ice, setIce] = createSignal("");
 
-  // const addAlertNotify = () => toast.error('請選擇 mood, size, sugar, ice',{
-  //   duration: 2000,
-  //   position: 'top-center',    
-  // });
-  
-  // const addSuccesstNotify = () => toast.success('加入成功',{
-  //   duration: 2000,
-  //   position: 'top-center',    
-  // });
 
 function addToBillsHandler(category) {
     // console.log("mood", mood());

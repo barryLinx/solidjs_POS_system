@@ -21,7 +21,7 @@ async function customFetch(url, options = {}) {
 
   //console.log("resJson :", resJson);
 
-  if (response.status === 402) {
+  if (response.status === 441) {
     console.log("not ok response :", response);
     localStorage.setItem("localAccessToken", "");
 

@@ -26,7 +26,7 @@ function App() {
     <>
     <Route path="/login" component={Login} />
       <Route path="/" component={RouteGuard}>
-        <Route path="/home" component={Home} />
+        <Route path="/" component={Home} />
         <Route path="/menu" component={Menu} />
         <Route path="/setting" component={Setting} matchFilters={requireAdmin} />
       </Route>

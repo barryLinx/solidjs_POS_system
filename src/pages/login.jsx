@@ -41,7 +41,7 @@ createEffect(() => {
       const jsonData = await response.json();
       localStorage.setItem("localAccessToken", jsonData.accessToken);
       setLocalAccessToken(jsonData.accessToken);
-      navigate("/home", { replace: true });
+      navigate("/", { replace: true });
     }
     if(response.status == 401){
       loginErrorNotify();

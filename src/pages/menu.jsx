@@ -1,18 +1,20 @@
-import { createEffect, createSignal, For, createMemo } from "solid-js";
+import { createEffect, createSignal, For, Show, createMemo } from "solid-js";
 import Asidebar from "../layout/aside";
 //import billStore from "../store/billStore";
-//import { useNavigate } from "@solidjs/router";
+import { useNavigate } from "@solidjs/router";
 
 import customFetch from "../helper/customFetch";
 import authStore from "../store/authStore";
-import MenuCard from '../components/menuCard'
+import MenuCard from "../components/menuCard";
 
 function menu() {
-  const { localAccessToken, userName, setLocalAccessToken } = authStore;
+  const { localAccessToken, userName, setLocalAccessToken, setStatusCode } =
+    authStore;
+  const navigate = useNavigate();
   //const { setBills, bills } = billStore;
   const [menuData, setMenuData] = createSignal([]);
   const [current, setCurrent] = createSignal("all");
- // const [hasSelect, setHasSelect] = createSignal("");
+  // const [hasSelect, setHasSelect] = createSignal("");
   const [categorys, setCategorys] = createSignal([
     { name: "coffee", icon: "fas fa-coffee" },
     { name: "juice", icon: "fas fa-wine-glass-alt" },
@@ -21,7 +23,6 @@ function menu() {
     { name: "sandwich", icon: "fas fa-hamburger" },
     { name: "dessert", icon: "fas fa-stroopwafel" },
   ]);
-
 
   function capitalizeFirstLetter(capitalizeText = "") {
     return capitalizeText.charAt(0).toUpperCase() + capitalizeText.slice(1);
@@ -36,29 +37,38 @@ function menu() {
     6: "dessert",
   };
 
-  createEffect(async () => {
-    if (!localAccessToken()) {
-      return;
-    }
-    const response = await customFetch("api/getMenuData", {
-      method: "get",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+  createEffect(() => {
+    (async () => {
+      const response = await customFetch("api/getMenuData", {
+        method: "get",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(" Menu response", response);
 
-    const jsonData = await response.json();
-    console.log(" Menu response", response);
-    console.log("Menu jsonData", jsonData);
-    // 更新資料
-    setMenuData(jsonData);
-    //   try {
-    // } catch (error) {
-    //   console.error("Error fetching data:", error);
-    //   localStorage.setItem("localAccessToken", "");
-    //   setLocalAccessToken('');
-    //   navigate("/*404", { replace: true });
-    // }
+      if (response.status == 441) {
+        setStatusCode(441);
+        // navigate("/home");
+        // localStorage.setItem("localAccessToken", "");
+        // setLocalAccessToken('');
+        // navigate("/", { replace: true });
+        return;
+      }
+      const jsonData = await response.json();
+
+      console.log("Menu jsonData", jsonData);
+
+      // 更新資料
+      setMenuData(jsonData);
+      //   try {
+      // } catch (error) {
+      //   console.error("Error fetching data:", error);
+      //   localStorage.setItem("localAccessToken", "");
+      //   setLocalAccessToken('');
+      //   navigate("/*404", { replace: true });
+      // }
+    })();
   });
 
   const filterCategory = createMemo(() => {
@@ -79,7 +89,6 @@ function menu() {
     return categoryData;
   });
 
-
   function addToBillsHandler(category) {
     // console.log("mood", mood());
     // console.log("size", size());
@@ -89,26 +98,25 @@ function menu() {
       alert("Please select mood, size, sugar, ice");
       return;
     }
-   
-    setBills((currentBills) => {     
-        // 將其累加到清單中
-        return [
-          ...currentBills,
-          {
-            id: category.id,
-            name: category.name,
-            price: category.price,
-            quantity: 1,
-            imgUrl: category.imgUrl,
-            mood: mood(),
-            size: size(),
-            sugar: sugar(),
-            ice: ice(),
-          },
-        ];
+
+    setBills((currentBills) => {
+      // 將其累加到清單中
+      return [
+        ...currentBills,
+        {
+          id: category.id,
+          name: category.name,
+          price: category.price,
+          quantity: 1,
+          imgUrl: category.imgUrl,
+          mood: mood(),
+          size: size(),
+          sugar: sugar(),
+          ice: ice(),
+        },
+      ];
     });
   }
-
 
   return (
     <>
@@ -174,7 +182,8 @@ function menu() {
             </div>
             <div class="col-6 test-end">
               <p class="text-end align-middle fs-4">
-                {filterCategory().length}  {capitalizeFirstLetter(current())} <span>Result</span>
+                {filterCategory().length} {capitalizeFirstLetter(current())}{" "}
+                <span>Result</span>
               </p>
             </div>
           </div>
@@ -187,115 +196,42 @@ function menu() {
                 {(category, i) => (  </For> */}
             <For each={filterCategory()}>
               {(category, i) => (
-                <MenuCard categoryData={category} addToBills={addToBillsHandler} />                
+                <MenuCard
+                  categoryData={category}
+                  addToBills={addToBillsHandler}
+                />
               )}
             </For>
-            {/* <!-- Card --> */}
-            <div class="card-wrap d-flex flex-column p-4 bg-light rounded-5">
-              {/* <!--Card-header--> */}
-              <div class=" d-flex align-items-md-start">
-                <div class="img-wrap me-3">
-                  <img
-                    class="rounded-5 object-fit-cover"
-                    style="height: 10rem; width: 8rem;"
-                    src="https://placehold.co/900x1000"
-                    alt=""
-                  />
-                </div>
-                <div class="info" style="width: 12rem;">
-                  <h4 class="text-wrap">Hot Pizza.</h4>
-                  <p class="text-ellipsis">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  </p>
-                  <p class="fs-4">
-                    <sup>NT</sup>35.6
-                  </p>
-                </div>
-              </div>
-              {/* <!--Card-header End--> */}
-              {/* <!--  Card-body--> */}
-              <div class="body-content row mt-4">
-                <div class="mood col-md-6 mb-5">
-                  <h3 class="mb-2">Mood</h3>
-                  <button type="button" class="btn">
-                    <span class="fire fab fa-hotjar text-danger fs-3 rounded-circle"></span>
-                  </button>
-                  <button type="button" class="btn">
-                    <span class="icecube far fa-snowflake text-info fs-3  rounded-circle"></span>
-                  </button>
-                </div>
-                <div class="size col-md-6 mb-5">
-                  <h3>Size</h3>
-                  <button
-                    class="btn rounded-circle bg-gray-1 me-1 text-center"
-                    style="width: 2.5rem; height: 2.5rem;"
-                  >
-                    <span class="fw-bold fs-5">S</span>
-                  </button>
-                  <button
-                    class="btn rounded-circle bg-gray-1 me-1 text-center"
-                    style="width: 2.5rem; height: 2.5rem;"
-                  >
-                    <span class="fw-bold fs-5">M</span>
-                  </button>
-                  <button
-                    class="btn rounded-circle bg-gray-1 me-1 text-center"
-                    style="width: 2.5rem; height: 2.5rem;"
-                  >
-                    <span class="fw-bold fs-5">L</span>
-                  </button>
-                </div>
-                <div class="sugar col-md-6">
-                  <h3 class="mb-4">Sugar</h3>
-                  <button
-                    class="btn rounded-circle bg-gray-1"
-                    style="width: 3rem; height: 3rem;"
-                  >
-                    <span class="fs-6 fw-bold text-warning ">30%</span>
-                  </button>
-                  <button
-                    class="btn rounded-circle bg-gray-1"
-                    style="width: 3rem; height: 3rem;"
-                  >
-                    <span class="fs-6 fw-bold">50%</span>
-                  </button>
-                  <button
-                    class="btn rounded-circle bg-gray-1"
-                    style="width: 3rem; height: 3rem;"
-                  >
-                    <span class="fs-6 fw-bold text-danger">70%</span>
-                  </button>
-                </div>
-                <div class="ice col-md-6">
-                  <h3 class="mb-4">Ice</h3>
-                  <button
-                    class="btn rounded-circle bg-gray-1"
-                    style="width: 3rem; height: 3rem;"
-                  >
-                    <span class=" text-warning fw-bold">30%</span>
-                  </button>
-                  <button
-                    class="btn rounded-circle bg-gray-1"
-                    style="width: 3rem; height: 3rem;"
-                  >
-                    <span class="fw-bold">50%</span>
-                  </button>
-                  <button
-                    class="btn rounded-circle bg-gray-1"
-                    style="width: 3rem; height: 3rem;"
-                  >
-                    <span class="fw-bold text-danger">70%</span>
-                  </button>
-                </div>
-              </div>
-              {/* <!--  Card-body End--> */}
-              <div class="mt-5">
-                <button class="w-100 rounded-3 py-3 fs-4 fw-bold btn btn-primary text-light">
-                  加入購買清單
-                </button>
-              </div>
-            </div>
-            {/* <!-- Card End--> */}
+            <Show when={menuData().length ==0}>
+              {[...Array(10)].map((_, i) => (
+                <>
+                  <div class="col-md-6">
+                    <div class="card" aria-hidden="true">
+                      <img
+                        src="https://placehold.co/400x200"
+                        class="card-img-top"
+                      />
+                      <div class="card-body">
+                        <h5 class="card-title placeholder-glow">
+                          <span class="placeholder col-6"></span>
+                        </h5>
+                        <p class="card-text placeholder-glow">
+                          <span class="placeholder col-7"></span>
+                          <span class="placeholder col-4"></span>
+                          <span class="placeholder col-4"></span>
+                          <span class="placeholder col-6"></span>
+                          <span class="placeholder col-8"></span>
+                        </p>
+                        <a
+                          class="btn btn-primary disabled placeholder col-6"
+                          aria-disabled="true"
+                        ></a>
+                      </div>
+                    </div>
+                  </div>
+                </>
+              ))}
+            </Show>
           </div>
         </div>
         {/* <!--Menu content --> */}
@@ -305,10 +241,6 @@ function menu() {
   );
 }
 export default menu;
-
-
-
-
 
 // // 檢查購物清單中是否已經有這個項目
 // const existingIndex = currentBills.findIndex(

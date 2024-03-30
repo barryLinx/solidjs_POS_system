@@ -1,13 +1,15 @@
 import { For, Show, createEffect, createSignal } from "solid-js";
-import { useNavigate } from "@solidjs/router";
+import { useNavigate, useLocation } from "@solidjs/router";
 import authStore from "../store/authStore";
 import formatNumber from "../helper/formatNumber";
 import customFetch from "../helper/customFetch";
+import { invalidAccessTokenNotify } from "../helper/notifyToast";
 
 function Home() {
-  const { localAccessToken, userName ,setLocalAccessToken} = authStore;
+  const { setStatusCode, localAccessToken, setLocalAccessToken } = authStore;
   const [dailySales, setDailySales] = createSignal({});
   const navigate = useNavigate();
+  // const location = useLocation();
 
   const payEnum = {
     1: "現金",
@@ -27,23 +29,31 @@ function Home() {
     3: "text-bg-danger",
   };
 
-  createEffect(async () => {
-    
-      if(!localAccessToken()){
-        return;
-      }
+  createEffect(() => {
+    (async () => {
+      // if (!localAccessToken()) {
+      //   navigate("/login", { replace: true });
+      //   return;
+      // }
       const response = await customFetch("api/getSalesData", {
         method: "get",
         headers: {
           "Content-Type": "application/json",
         },
       });
+
       console.log("Home response", response);
 
+      if (response.status == 441) {
+        setStatusCode(441);
+        // navigate("/", { replace: true });
+        return;
+      }
       const jsonData = await response.json();
-      console.log("Home jsonData", jsonData);
-      setDailySales(jsonData);
+      //console.log("Home jsonData", jsonData);
 
+      setDailySales(jsonData);
+    })();
   });
 
   return (
@@ -137,7 +147,24 @@ function Home() {
                   )}
                 </For>
 
-               
+                <Show when={!dailySales()?.dailySales}>
+                  {[...Array(10)].map((_, i) => (
+                    <tr class="placeholder-glow">
+                      <th class="fs-4" scope="row">
+                        <span class="placeholder col-6"></span>
+                      </th>
+                      <td class="fs-4 fw-bold">
+                        <span class="placeholder col-6"></span>
+                      </td>
+                      <td class="fs-4 fw-bold">
+                        <span class="placeholder col-6"></span>
+                      </td>
+                      <td>
+                        <span class="placeholder col-6"></span>
+                      </td>
+                    </tr>
+                  ))}
+                </Show>
               </tbody>
             </table>
           </div>

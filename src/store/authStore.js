@@ -3,6 +3,7 @@ import { createSignal, createEffect,createMemo, createRoot  } from "solid-js";
 function createLoginStatus() {
   //const [accessToken, setAccessToken] = createSignal("");
   const [userName, setUserName] = createSignal("");
+  const [statusCode, setStatusCode] = createSignal(200);
   //const [userRole, setUserRole] = createSignal("");
   
   // 事件監聽 localStorage的變化，更新localAccessToken
@@ -13,7 +14,7 @@ function createLoginStatus() {
     setLocalAccessToken(localStorage.getItem("localAccessToken"));
   });
 
-  return { userName, setUserName,localAccessToken,setLocalAccessToken };
+  return { statusCode,setStatusCode,userName, setUserName,localAccessToken,setLocalAccessToken };
 }
 
 export default createRoot(createLoginStatus);

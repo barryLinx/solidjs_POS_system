@@ -50,8 +50,8 @@ function sidebars() {
           <a
             class="py-2 rounded-4 btn btn-outline-primary d-flex flex-column"
          
-            classList={{ active: current() === "/home" || current() === "/login"  }}
-            href="/home"
+            classList={{ active: current() === "/" || current() === "/login"  }}
+            href="/"
           >
             <i class="fas fa-home fs-2 mb-2"></i>
             <span>home</span>

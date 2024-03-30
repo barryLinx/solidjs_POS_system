@@ -16,10 +16,18 @@ async function customFetch(url, options = {}) {
     credentials: "include", // 確保cookie被發送
   };
   let response = await fetch(baseURL + url, updatedOptions);
-  //console.log("response :", response);
+  console.log("response :", response);
   //let resJson = await response.json();
 
   //console.log("resJson :", resJson);
+  // if (response.status === 441) {
+  //   //window.location.href="/login";
+  //   return Promise.resolve({
+  //     status:441,
+  //     redirect: "/login",
+  //     msg: "重新登入",
+  //   });
+  // }
 
   // if (response.status === 441) {
   //   console.log("not ok response :", response);
@@ -51,7 +59,7 @@ async function customFetch(url, options = {}) {
   //     //   redirect: "/login",
   //     //   msg: "重新登入 ",
   //     // });
-  //     } 
+  //     }
   //     //else {
   //   // //   //跳轉到 login 頁面
   //   // //   return Promise.reject({
@@ -60,7 +68,6 @@ async function customFetch(url, options = {}) {
   //   // //     statusCustom: 4001, //
   //   // //   });
 
-     
   //  // }
   // }
   return response; // 返回原始請求回應(如果有)

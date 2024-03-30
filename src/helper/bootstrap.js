@@ -11,4 +11,5 @@ import 'bsJs/popover';
 // import 'bootstrap/js/dist/scrollspy';  
 // import 'bootstrap/js/dist/tab';
 import 'bsJs/toast';
+
 // import 'bootstrap/js/dist/tooltip';

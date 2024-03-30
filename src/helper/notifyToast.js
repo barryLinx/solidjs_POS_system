@@ -12,6 +12,16 @@ const loginErrorNotify = () => toast.error('請檢查密碼或帳號',{
   position: 'top-center',    
 });
 
+const invalidAccessTokenNotify = () => toast.error('已經逾時,請重新登入',{
+  duration: 2000,
+  position: 'top-center',    
+});
+
+const changeFailedNotify = () => toast.error('已經逾時,請重新登入',{
+  duration: 2000,
+  position: 'top-center',    
+})
+
 
 const addSuccesstNotify = () => toast.success('加入成功',{
   duration: 2000,
@@ -37,4 +47,4 @@ const  notAuthorized = ()=>toast.error("You are not authorized to access this pa
 
 });
 
-export { loginErrorNotify,addAlertNotify, addSuccesstNotify ,editSuccessNotify,deleteNotify,notAuthorized};
+export { changeFailedNotify,invalidAccessTokenNotify,loginErrorNotify,addAlertNotify, addSuccesstNotify ,editSuccessNotify,deleteNotify,notAuthorized};

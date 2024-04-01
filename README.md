@@ -37,5 +37,5 @@
 
 ## deploy
 
-vercel
-zeabur
+- vercel  部屬  後端
+- zeabur  部屬  前端

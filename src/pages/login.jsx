@@ -9,6 +9,7 @@ function Login() {
   const { localAccessToken,userName ,setUserName ,setLocalAccessToken} = authStore; 
   const [passWord, setPassWord] = createSignal("");
   const navigate = useNavigate();
+  const errCode =[404,441];
 
 createEffect(() => {
 //有 accessToken 就跳轉到首頁
@@ -45,16 +46,15 @@ createEffect(() => {
       navigate("/", { replace: true });
     }
 
-    if(response.status === 404){
+    let checkstatus = errCode.find((code)=>(code == response.status));
+
+    if(checkstatus){
       // const jsonData = await response.json();
       // console.log("Login",jsonData);
       loginErrorNotify();
     }
       
-    // } catch (error) {
-    //   console.error("Error fetching data:", error);
-    //   navigate("/*", { replace: true });
-    // }
+
   }
    
   

@@ -1,6 +1,6 @@
 import { createEffect, createSignal, For, Show } from "solid-js";
 import customFetch from "../helper/customFetch";
-//import authStore from "../store/authStore";
+import authStore from "../store/authStore";
 import {
   notAuthorized,
   editSuccessNotify,
@@ -9,9 +9,10 @@ import {
 import { useNavigate } from "@solidjs/router";
 import RoleBasedAccess from "../components/roleBasedAccess";
 
+
 function setting() {
   //const [changeRole,setChangeRole] = createSignal('');
-  //const { userRole } = authStore;
+  const { setStatusCode } = authStore;
   const [userList, setUserList] = createSignal([]);
   const navigate = useNavigate();
 
@@ -23,17 +24,19 @@ function setting() {
       },
     });
 
-    if (response.status == 404) {
-      console.log(" setting response", response);
-      //changeFailedNotify();
-    }
+ 
+    // token 未允許授權
     if (response?.status == 403) {
       notAuthorized();
       navigate("/", { replace: true });
     }
-    if (response.status == 441) {
-      setStatusCode(441);
-      // navigate("/", { replace: true });
+
+    // token 已經逾時
+    if (response.status == 441 || response.status == 404) {
+      console.log(" setting response", response);
+      changeFailedNotify();
+      setStatusCode(441);            
+     // navigate("/", { replace: true });
       return;
     }
 
@@ -55,17 +58,22 @@ function setting() {
       //setChangeRole(role);
       //console.log("changeRole",changeRole())
       const response = await customFetch("api/setUserRole", {
-        method: "PATCH",
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          id: user.id,
           role,
         }),
       });
       const jsonData = await response.json();
       console.log("roleBasedAccess", jsonData);
       fetchUserList();
+      if (response.status == 441) {
+        setStatusCode(441);
+        changeFailedNotify();
+      }
       if (response.status == 500) {
         changeFailedNotify();
       }

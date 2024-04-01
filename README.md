@@ -1,6 +1,6 @@
 # 點餐 POS 系統
 
-[demo](https://barrylinx.github.io/VanillaJS_PMAQI/dist/index.html)
+[demo](https://pos.zeabur.app)
 
 ## 開發環境
 
@@ -9,7 +9,7 @@
 
 ## 參考來源
 
-[webUI-POS-System-for-Coffee-Shop](https://dribbble.com/shots/15629660-Kopinan-POS-System-for-Coffee-Shop)
+- [webUI-POS-System-for-Coffee-Shop](https://dribbble.com/shots/15629660-Kopinan-POS-System-for-Coffee-Shop)
 
 ## 使用程式語言
 
@@ -17,5 +17,4 @@
 - Bootstrap v5
 
 ## 輔助工具
-
 - chatGPT 3.5

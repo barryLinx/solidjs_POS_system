@@ -11,16 +11,13 @@
 
 - [webUI-POS-System-for-Coffee-Shop](https://dribbble.com/shots/15629660-Kopinan-POS-System-for-Coffee-Shop)
 
-## 使用程式語言
+## 使用程式
 
 >後端
-
-- fastify
-
+  fastify nodejs 1.8.7
 >前端
-
-- solidjs v1.8.7
-- Bootstrap v5
+  solidjs v1.8.7
+  Bootstrap v5
 
 ## 輔助工具
 
@@ -29,3 +26,8 @@
 ## 狀態碼
 
 - 441: AccessToken 逾時
+
+## deploy
+
+vercel
+zeabur

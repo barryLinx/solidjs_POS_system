@@ -13,7 +13,7 @@ function Login() {
 createEffect(() => {
 //有 accessToken 就跳轉到首頁
   if (localAccessToken()) {
-    navigate("/home", { replace: true });
+    navigate("/", { replace: true });
   }
 })
 
@@ -27,7 +27,7 @@ createEffect(() => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          username: userName(),
+          id: userName(),
           password: passWord(),
         }),
       });
@@ -35,15 +35,19 @@ createEffect(() => {
 
       console.log("Login",response);
       // 更新資料
-   
+     
     //  setUserRole(jsonData.userRole);
+
     if(response.ok){
       const jsonData = await response.json();
       localStorage.setItem("localAccessToken", jsonData.accessToken);
       setLocalAccessToken(jsonData.accessToken);
       navigate("/", { replace: true });
     }
-    if(response.status == 401){
+
+    if(response.status === 404){
+      // const jsonData = await response.json();
+      // console.log("Login",jsonData);
       loginErrorNotify();
     }
       

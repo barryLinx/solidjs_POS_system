@@ -16,40 +16,51 @@ function setting() {
   const navigate = useNavigate();
 
   async function fetchUserList() {
-    const response = await customFetch("api/usersRole", {
+    const response = await customFetch("api/usersRole", {      
       method: "get",
       headers: {
         "Content-Type": "application/json",
       },
     });
 
-    const jsonData = await response.json();
-    console.log(" setting response", response);
-    console.log("setting jsonData", jsonData);
-    setUserList(jsonData);
+    if (response.status == 404) {
+      console.log(" setting response", response);
+      //changeFailedNotify();
+    }
     if (response?.status == 403) {
       notAuthorized();
       navigate("/", { replace: true });
     }
+    if (response.status == 441) {
+      setStatusCode(441);
+      // navigate("/", { replace: true });
+      return;
+    }
+
+
+    const jsonData = await response.json();
+    console.log(" setting response", response);
+    console.log("setting jsonData", jsonData);
+    setUserList(jsonData);
   }
 
   createEffect(() => {
     fetchUserList();
   });
 
-  async function rolehandle(username, role) {
+  async function rolehandle(user, role) {
     try {
-      console.log("userData_username", username);
+      console.log("user", user);
+      console.log("role", role);
       //setChangeRole(role);
       //console.log("changeRole",changeRole())
       const response = await customFetch("api/setUserRole", {
-        method: "POST",
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          username: username,
-          role: role,
+          role,
         }),
       });
       const jsonData = await response.json();
@@ -101,7 +112,7 @@ function setting() {
                 {(user, i) => (
                   <tr>
                     <th class="fw-bold fs-3" scope="row">
-                      {user.username}
+                      {user.id}
                     </th>
                     <td class="fw-bold fs-4">{user.email}</td>
                     <td class="fw-bold fs-4 ">

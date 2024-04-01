@@ -1,7 +1,9 @@
 //import axios from "axios";
 // import dotenv from 'dotenv';
 // dotenv.config();
+//import fetchPrefix from "./fetchPrefix";
 const baseURL = import.meta.env.VITE_VERCEL_URL;
+
 
 async function customFetch(url, options = {}) {
   // console.log("baseURL", process.env.VITE_VERCEL_URL);

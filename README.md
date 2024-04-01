@@ -13,8 +13,19 @@
 
 ## 使用程式語言
 
+>後端
+
+- fastify
+
+>前端
+
 - solidjs v1.8.7
 - Bootstrap v5
 
 ## 輔助工具
+
 - chatGPT 3.5
+
+## 狀態碼
+
+- 441: AccessToken 逾時

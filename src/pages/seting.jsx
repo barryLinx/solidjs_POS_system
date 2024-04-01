@@ -9,7 +9,6 @@ import {
 import { useNavigate } from "@solidjs/router";
 import RoleBasedAccess from "../components/roleBasedAccess";
 
-
 function setting() {
   //const [changeRole,setChangeRole] = createSignal('');
   const { setStatusCode } = authStore;
@@ -17,14 +16,13 @@ function setting() {
   const navigate = useNavigate();
 
   async function fetchUserList() {
-    const response = await customFetch("api/usersRole", {      
+    const response = await customFetch("api/usersRole", {
       method: "get",
       headers: {
         "Content-Type": "application/json",
       },
     });
 
- 
     // token 未允許授權
     if (response?.status == 403) {
       notAuthorized();
@@ -33,13 +31,12 @@ function setting() {
 
     // token 已經逾時
     if (response.status == 441 || response.status == 404) {
-      console.log(" setting response", response);
+      console.log("setting response", response);
       changeFailedNotify();
-      setStatusCode(441);            
-     // navigate("/", { replace: true });
+      setStatusCode(441);
+      // navigate("/", { replace: true });
       return;
     }
-
 
     const jsonData = await response.json();
     console.log(" setting response", response);
@@ -190,7 +187,7 @@ function setting() {
                   </tr>
                 )}
               </For>
-              <Show when={!userList()}>
+              <Show when={userList().length == 0}>
                 {[...Array(10)].map((_, i) => (
                   <tr class="placeholder-glow">
                     <th class="fs-4" scope="row">

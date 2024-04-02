@@ -33,14 +33,18 @@
 | 狀態碼 | 註解 |
 | -------- | ------ |
 | 401     | 登入錯誤 |
-| 404     |  找不道 |
+| 404     |  找不到 |
 | 403    |  禁止  |
 | 441    | AccessToken 逾時|
 
 ## deploy
 
-- vercel 部屬 fastify
+- vercel
 
-- vercel 部屬 json-server
+  部屬 fastify
+  部屬 json-server
 
 - zeabur
+
+  部屬 solidjs
+  

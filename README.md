@@ -17,12 +17,12 @@
 
 >後端
 
-  fastify nodejs 1.8.7
+- fastify nodejs 1.8.7
   
 >前端
 
-  solidjs v1.8.7
-  Bootstrap v5
+- solidjs v1.8.7
+- Bootstrap v5
 
 ## 輔助工具
 
@@ -47,4 +47,3 @@
 - zeabur
 
   部屬 solidjs
-  

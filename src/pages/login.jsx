@@ -1,12 +1,12 @@
 import { createSignal, createEffect } from "solid-js";
-import { redirect, useNavigate } from "@solidjs/router";
+import { json, redirect, useNavigate } from "@solidjs/router";
 import authStore from "../store/authStore";
 import customFetch from "../helper/customFetch";
 import {loginErrorNotify} from "../helper/notifyToast"
 import { Toaster } from 'solid-toast';
 
 function Login() {
-  const { localAccessToken,userName ,setUserName ,setLocalAccessToken} = authStore; 
+  const { localAccessToken,setUserId,userId,setUserName ,setLocalAccessToken} = authStore; 
   const [passWord, setPassWord] = createSignal("");
   const navigate = useNavigate();
  // const errCode =[404,441];
@@ -28,7 +28,7 @@ createEffect(() => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          id: userName(),
+          id: userId(),
           password: passWord(),
         }),
       });
@@ -42,6 +42,7 @@ createEffect(() => {
     if(response.ok){
       const jsonData = await response.json();
       localStorage.setItem("localAccessToken", jsonData.accessToken);
+      setUserName(jsonData.userName); 
       setLocalAccessToken(jsonData.accessToken);
       navigate("/", { replace: true });
     }
@@ -68,8 +69,8 @@ createEffect(() => {
             <input
               id="user"
               type="text"
-              value={userName()}
-              onInput={(e) => setUserName(e.target.value)}
+              value={userId()}
+              onInput={(e) => setUserId(e.target.value)}
               required
             />
             <label for="user">

@@ -2,7 +2,10 @@
 
 [Demo](https://pos.zeabur.app)
 
-[Vercel_Fastify_API](https://fastify-pos.vercel.app/)
+## 登入請使用
+
+- 工號: 100
+- 密碼: 123456
 
 ## 開發環境
 

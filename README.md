@@ -31,11 +31,10 @@
 ## 狀態碼
 
 | 狀態碼 | 註解 |
-| -------- | ------ |
-| 401     | 登入錯誤 |
-| 404     |  找不到 |
+| -------| ------ |
+| 401    |  AccessToken not found  |
 | 403    |  禁止  |
-| 441    | AccessToken 逾時|
+| 441    | AccessToken 逾時 , Not Found user, 帳號或密碼錯誤|
 
 ## deploy
 

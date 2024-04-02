@@ -1,6 +1,8 @@
 # 點餐 POS 系統
 
-[demo](https://pos.zeabur.app)
+[Demo](https://pos.zeabur.app)
+
+[Vercel_Fastify_API](https://fastify-pos.vercel.app/)
 
 ## 開發環境
 
@@ -37,5 +39,8 @@
 
 ## deploy
 
-vercel
-zeabur
+- vercel 部屬 fastify
+
+- vercel 部屬 json-server
+
+- zeabur

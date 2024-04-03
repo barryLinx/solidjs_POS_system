@@ -1,14 +1,22 @@
-import { For, Show, createEffect, createSignal } from "solid-js";
-import { useNavigate, useLocation } from "@solidjs/router";
+import { For, Show, createEffect, createMemo, createSignal } from "solid-js";
+//import { useNavigate, useLocation } from "@solidjs/router";
 import authStore from "../store/authStore";
 import formatNumber from "../helper/formatNumber";
 import customFetch from "../helper/customFetch";
-import { invalidAccessTokenNotify } from "../helper/notifyToast";
+import Pagination from "../components/pagination";
+//import { invalidAccessTokenNotify } from "../helper/notifyToast";
 
 function Home() {
-  const { setStatusCode, localAccessToken, setLocalAccessToken } = authStore;
+  
+  const { setStatusCode } = authStore;
   const [dailySales, setDailySales] = createSignal({});
-  const navigate = useNavigate();
+  const [dataSales, setDataSales] = createSignal([]);
+
+  // 分頁設定
+  const itemsPerPage = 10;
+  const [currentPage, setCurrentPage] = createSignal(1);
+
+  //const navigate = useNavigate();
   // const location = useLocation();
 
   const payEnum = {
@@ -50,11 +58,22 @@ function Home() {
         return;
       }
       const jsonData = await response.json();
-      //console.log("Home jsonData", jsonData);
+      console.log("Home jsonData", jsonData);
 
       setDailySales(jsonData);
+      setDataSales(jsonData?.dailySales);
+      console.log("Home dailySales", dataSales());
     })();
   });
+  
+  const dataPages = Array.from({ length: dataSales().length }, (_, index) => `Item ${index + 1}`);
+
+  const paginatedData = createMemo(() =>
+    dataSales().slice(
+      (currentPage() - 1) * itemsPerPage,
+      currentPage() * itemsPerPage
+    )
+  );
 
   return (
     <div
@@ -124,7 +143,8 @@ function Home() {
                 </tr>
               </thead>
               <tbody>
-                <For each={dailySales()?.dailySales}>
+                <For each={paginatedData()}>
+                  {/* <For each={dailySales()?.dailySales}> */}
                   {(sales, i) => (
                     <>
                       <tr>
@@ -146,7 +166,6 @@ function Home() {
                     </>
                   )}
                 </For>
-
                 <Show when={!dailySales()?.dailySales}>
                   {[...Array(10)].map((_, i) => (
                     <tr class="placeholder-glow">
@@ -167,6 +186,14 @@ function Home() {
                 </Show>
               </tbody>
             </table>
+          </div>
+          <div class="col-md">
+            <Pagination
+              totalItems={dataSales().length}
+              itemsPerPage={itemsPerPage}
+              currentPage={currentPage()}
+              onPageChange={setCurrentPage}
+            />
           </div>
         </div>
       </div>

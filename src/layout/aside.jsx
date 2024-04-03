@@ -6,10 +6,11 @@ import formatNumber from "../helper/formatNumber";
 // import NoteDialogsModel from "../components/noteDialogsModel";
 const NoteDialogsModel =lazy(() => import("../components/noteDialogsModel"));
 const BillCard = lazy(() => import("../components/billCard"));
+import { checkoutPayNotify } from "../helper/notifyToast";
 
 function aside() {
   const { userName } = authStore;
-  const { bills,editBill } = billStore;
+  const { bills,editBill,setBills } = billStore;
   const [moneyComputed, setMoneyComputed] = createSignal(0);
   const [current, setCurrent] = createSignal('cash');
 
@@ -21,6 +22,11 @@ function aside() {
     setMoneyComputed(total);
     return total;
   });
+
+  const checkoutPay = () => { 
+    setBills([]);
+    checkoutPayNotify();
+  }
 
   return (
     <>
@@ -131,7 +137,9 @@ function aside() {
       </div>
       {/* <!-- Payment End--> */}
 
-      <button class="mt-4 btn btn-primary d-block w-100 fs-4">列印帳單</button>
+      <button class="mt-4 btn btn-primary d-block w-100 fs-4"
+      onClick={()=>checkoutPay()}
+      >列印帳單</button>
     </div>
     <NoteDialogsModel/>
     </>

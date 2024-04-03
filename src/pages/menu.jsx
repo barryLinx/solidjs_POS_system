@@ -131,7 +131,7 @@ function menu() {
               <h2 class="fw-bold ">Choose Category</h2>
             </div>
             <div class="col-md-6">
-              <div class="input-group flex-nowrap ">
+              {/* <div class="input-group flex-nowrap ">
                 <input
                   id="search"
                   type="text"
@@ -143,7 +143,7 @@ function menu() {
                 <span class="input-group-text fs-4" id="addon-wrapping">
                   <label for="search" class="fas fa-search"></label>
                 </span>
-              </div>
+              </div> */}
             </div>
           </div>
           {/* <!-- Choose search End--> */}

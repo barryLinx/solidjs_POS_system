@@ -187,7 +187,7 @@ function Home() {
               </tbody>
             </table>
           </div>
-          <div class="col-md">
+          <div class="d-flex justify-content-end">
             <Pagination
               totalItems={dataSales().length}
               itemsPerPage={itemsPerPage}

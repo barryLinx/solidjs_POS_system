@@ -14,7 +14,7 @@ const Pagination = (props) => {
   
   const total = Math.ceil(props.totalItems / props.itemsPerPage);
   const start = props.currentPage > 1 ? props.currentPage - 1 : 1;
-  const end = start + 2 <= total ? start + 2 : total;
+  const end = start + 5 <= total ? start + 5 : total;
   setStartPage(start);
   setEndPage(end);
   setTotalPages(total);

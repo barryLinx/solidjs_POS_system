@@ -26,7 +26,7 @@ const changeFailedNotify = () =>
     position: "top-center",
   });
   const billsIsEmptyNotify = () =>
-  toast.error("開始列印", {
+  toast.error("清單是空的", {
     duration: 2000,
     position: "top-center",
   });

@@ -6,7 +6,7 @@ import formatNumber from "../helper/formatNumber";
 // import NoteDialogsModel from "../components/noteDialogsModel";
 const NoteDialogsModel =lazy(() => import("../components/noteDialogsModel"));
 const BillCard = lazy(() => import("../components/billCard"));
-import { checkoutPayNotify } from "../helper/notifyToast";
+import { checkoutPayNotify,billsIsEmptyNotify } from "../helper/notifyToast";
 
 function aside() {
   const { userName } = authStore;
@@ -24,6 +24,10 @@ function aside() {
   });
 
   const checkoutPay = () => { 
+    if(bills().length === 0){
+      billsIsEmptyNotify();
+      return;
+    }
     setBills([]);
     checkoutPayNotify();
   }

@@ -21,7 +21,12 @@ const invalidAccessTokenNotify = () =>
   });
 
 const changeFailedNotify = () =>
-  toast.error("已經逾時,請重新登入", {
+  toast.error("變更失敗", {
+    duration: 2000,
+    position: "top-center",
+  });
+  const billsIsEmptyNotify = () =>
+  toast.error("開始列印", {
     duration: 2000,
     position: "top-center",
   });
@@ -65,4 +70,5 @@ export {
   editSuccessNotify,
   deleteNotify,
   notAuthorized,
+  billsIsEmptyNotify,
 };

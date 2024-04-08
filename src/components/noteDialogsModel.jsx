@@ -36,6 +36,10 @@ function noteDialogsModel() {
       alert("數量不可為 0");
       return;
     }
+    if (quantityEdit() >= 100) {
+      alert("超過上限 100");
+      return;
+    }
 
     setBills((currentBills) => {
       return currentBills.map((bill) => {

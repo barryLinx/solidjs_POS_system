@@ -130,55 +130,10 @@ function setting() {
                         {user.role}
                       </span>
                     </td>
-                    {/* <td class="fw-bold fs-4 ">
-                    <div class="form-check form-switch d-flex flex-column">
-                    <label
-                        class="form-check-label"
-                        for="flexSwitchCheckDefault"
-                      >
-                        admin
-                      <input
-                        class="form-check-input"
-                        type="checkbox"   
-                        role="switch"
-                        name="role"
-                        id="flexSwitchCheckDefault"
-                      />
-                     
-                      </label>
-                    </div>
-                    <div class="form-check form-switch ">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        role="switch"
-                        name="role"
-                        id="flexSwitchCheckDefault"
-                      />
-                      <label
-                        class="form-check-label"
-                        for="flexSwitchCheckDefault"
-                      >
-                        employee
-                      </label>
-                    </div>
-                    <div class="form-check form-switch d-flex flex-column-reverse ">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        role="switch"
-                        name="role"
-                        id="flexSwitchCheckDefault"
-                      />
-                      <label
-                        class="form-check-label"
-                        for="flexSwitchCheckDefault"
-                      >
-                       engineer
-                      </label>
-                    </div>
-                  </td> */}
-                    <td>
+                   
+                    <td 
+                    
+                    >                     
                       <RoleBasedAccess
                         userData={user}
                         roleBasehandle={rolehandle}

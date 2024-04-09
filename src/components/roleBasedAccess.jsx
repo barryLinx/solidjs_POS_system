@@ -5,11 +5,16 @@ function roleBasedAccess({ userData,roleBasehandle }) {
 
   return (
     <>
-      <div class="d-flex flex-column w-50">
+      <div class="d-flex flex-column w-50"
+      //  style={{
+      //   'pointer-events': userData.id === '100' ? 'none' : '',
+      //   'opacity':  userData.id === '100' ? 0.5 : '',
+      // }}
+      >
         <button
           className="btn btn-outline-danger mt-2"
           onClick={() => roleBasehandle(userData,'admin')}
-          classList={{ active: userData.role === 'admin' }}
+          classList={{ active: userData.role === 'admin'}}
         >
           admin
         </button>
